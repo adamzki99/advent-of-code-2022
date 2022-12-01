@@ -20,14 +20,14 @@ func main() {
 
 	fileScanner.Split(bufio.ScanLines)
 
-	var allGnomes []int
-	currentGnome := 0
+	var allElvesTotalCalories []int
+	currentElvesTotalCalories := 0
 
 	for fileScanner.Scan() {
 		if fileScanner.Text() == "" {
 
-			allGnomes = append(allGnomes, currentGnome)
-			currentGnome = 0
+			allElvesTotalCalories = append(allElvesTotalCalories, currentElvesTotalCalories)
+			currentElvesTotalCalories = 0
 
 		} else {
 
@@ -37,13 +37,15 @@ func main() {
 				fmt.Println(err)
 			}
 
-			currentGnome = currentGnome + calories
+			currentElvesTotalCalories = currentElvesTotalCalories + calories
 		}
 	}
 
-	sort.Ints(allGnomes)
+	sort.Ints(allElvesTotalCalories)
 
-	fmt.Println(allGnomes[len(allGnomes)-1])
+	sumOfTopThreeElves := allElvesTotalCalories[len(allElvesTotalCalories)-1] + allElvesTotalCalories[len(allElvesTotalCalories)-2] + allElvesTotalCalories[len(allElvesTotalCalories)-3]
+
+	fmt.Println(sumOfTopThreeElves)
 
 	readFile.Close()
 }
