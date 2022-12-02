@@ -20,3 +20,18 @@ It is also good to track how I create my "projects/modules", see the following s
 ```bash
 go mod init parrentFolder/currentFolder
 ```
+### Day 2
+
+Today I made use of the "defer" keyword to close the input file. This makes it so that the command after it is executed at the end of the program, making it easier for me to remember closing the file.
+
+Yesterday I made use of the following command to execute my programs:
+```bash
+go run main.go
+```
+
+Wich gave slow execution times comparing it to Albin Perssons implementation in COBOL. I forgot that I had to compile my program before running it!
+Now me and Albins implementations are neck and neck when it comes to execution times.
+
+Other new stuff is the usage of multi-dimensional arrays.
+
+In general it feels like "smooth sailing" when it comes to writing simple programs in GO.

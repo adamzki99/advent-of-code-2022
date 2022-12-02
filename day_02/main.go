@@ -7,16 +7,6 @@ import (
 	"strings"
 )
 
-/*
-X = 1 = Rock
-Y = 2 = Paper
-Z = 3 = Scissor
-
-A = Rock = 1
-B = Paper = 2
-C = Scissor = 3
-*/
-
 func translateInput(input string) int {
 
 	if input == "X" || input == "A" {
@@ -33,22 +23,56 @@ func translateInput(input string) int {
 
 }
 
-func calculateRound(elf string, me string) int {
+func calculateRound(elfSelection string, mySelection int) int {
 
-	myTranslatedInput := translateInput(me)
-	elfsTranslatedInput := translateInput(elf)
+	elfsTranslatedInput := translateInput(elfSelection)
 
-	differance := myTranslatedInput - elfsTranslatedInput
+	differance := mySelection - elfsTranslatedInput
 
 	if differance == 1 || differance == -2 {
-		return myTranslatedInput + 6
+		return mySelection + 6
 	}
 
 	if differance == 0 {
-		return myTranslatedInput + 3
+		return mySelection + 3
 	}
 
-	return myTranslatedInput
+	return mySelection
+}
+
+func makeSelection(elfSelection string, roundResult string) int {
+
+	winMatrix := [3][2]int{
+		{1, 3},
+		{2, 1},
+		{3, 2},
+	}
+
+	elfSelectionTranslatedToInt := translateInput(elfSelection)
+
+	if roundResult == "X" {
+		for _, element := range winMatrix {
+
+			if element[0] == elfSelectionTranslatedToInt {
+				return element[1]
+			}
+		}
+	}
+
+	if roundResult == "Y" {
+		return elfSelectionTranslatedToInt
+	}
+
+	if roundResult == "Z" {
+		for _, element := range winMatrix {
+
+			if element[1] == elfSelectionTranslatedToInt {
+				return element[0]
+			}
+		}
+	}
+
+	return 0
 }
 
 func main() {
@@ -70,7 +94,9 @@ func main() {
 
 		round := strings.Split(fileScanner.Text(), " ")
 
-		roundResult := calculateRound(round[0], round[1])
+		mySelection := makeSelection(round[0], round[1])
+
+		roundResult := calculateRound(round[0], mySelection)
 
 		gameResult = gameResult + roundResult
 	}
