@@ -29,8 +29,6 @@ func CalulateSum(arrayOfElfItems []rune) int {
 			priority = int(r) - 38
 		}
 
-		fmt.Println("Char", string(r), "-> Priority", priority)
-
 		totalSum = totalSum + priority
 
 	}
@@ -104,8 +102,6 @@ func main() {
 		amountOfLines++
 	}
 
-	fmt.Println("Amount of lines:", amountOfLines)
-	fmt.Println("Amount of elf items", len(arrayOfElfItems))
 	fmt.Println("Awnser:", CalulateSum(arrayOfElfItems))
 
 }
