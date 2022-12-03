@@ -36,16 +36,6 @@ func CalulateSum(arrayOfElfItems []rune) int {
 	return totalSum
 }
 
-func RugsackSplit(rugsack string) [2]string {
-
-	middleIndex := (len(rugsack)) / 2
-
-	firstHalf := rugsack[:middleIndex]
-	secondHalf := rugsack[middleIndex:]
-
-	return [2]string{firstHalf, secondHalf}
-}
-
 func FindItemsInRugsack(splitRugsack [2]string) []rune {
 
 	var arrayOfElfItems []rune
@@ -67,6 +57,15 @@ func FindItemsInRugsack(splitRugsack [2]string) []rune {
 	return arrayOfElfItems
 }
 
+func FindCommenItemBetweenThreeElfs(arrayOfRugsacks [3]string) rune {
+
+	commonItems := FindItemsInRugsack([2]string{arrayOfRugsacks[0], arrayOfRugsacks[1]})
+
+	commonItems = FindItemsInRugsack([2]string{string(commonItems), arrayOfRugsacks[2]})
+
+	return commonItems[0]
+}
+
 func main() {
 
 	inputFileName := os.Args[1]
@@ -86,20 +85,20 @@ func main() {
 
 	var arrayOfElfItems []rune
 
+	var tripletOfElfRugsacks [3]string
+
 	amountOfLines := 0
 
 	for fileScanner.Scan() {
 
-		splitRugsack := RugsackSplit(fileScanner.Text())
-
-		itemsInRugSack := FindItemsInRugsack(splitRugsack)
-
-		for _, r := range itemsInRugSack {
-
-			arrayOfElfItems = append(arrayOfElfItems, r)
-		}
+		tripletOfElfRugsacks[amountOfLines%3] = fileScanner.Text()
 
 		amountOfLines++
+
+		if amountOfLines%3 == 0 {
+			commonItem := FindCommenItemBetweenThreeElfs(tripletOfElfRugsacks)
+			arrayOfElfItems = append(arrayOfElfItems, commonItem)
+		}
 	}
 
 	fmt.Println("Awnser:", CalulateSum(arrayOfElfItems))
