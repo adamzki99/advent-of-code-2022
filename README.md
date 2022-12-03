@@ -4,6 +4,17 @@ In this read me I will keep a list of "Lessons learned" for each day of the even
 
 ## Lessons learned
 
+### Day 3
+
+Today was an interesting day. At first, my implementation got the wrong awnser. Even if my logic was sound and the example worked fine, I wasn't able to produce the right awnser. I resorted to writing tests, something that I found very easy to do in GO. This didn't find any problems. It was untill I explained my solution to a friend that I noticed that there was a mistake when splitting the rugsack content. 
+
+But the tests were able to help me find a problem with my implementation for part 2. So todays lesson was the following command:
+```bash
+go test
+```
+
+I also found it interesting that the type that you get from iterating over a string is "rune". Which holds the ASCII-value of the character according to the VSCode debugging tool.
+
 ### Day 2
 
 Today I made use of the "defer" keyword to close the input file. This makes it so that the command after it is executed at the end of the program, making it easier for me to remember closing the file.
