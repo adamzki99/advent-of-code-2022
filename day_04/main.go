@@ -73,6 +73,27 @@ func DoesOneRangePartiallyContainTheOther(twoElfsAssignments [2][]int) bool {
 	return false
 }
 
+func DoesOneRangePartiallyContainTheOther(twoElfsAssignments [2][]int) bool {
+
+	var shortestAsignmentListIndex int
+	var longestAsignmentListIndex int
+	if len(twoElfsAssignments[0]) < len(twoElfsAssignments[1]) {
+		shortestAsignmentListIndex = 0
+		longestAsignmentListIndex = 1
+	} else {
+		shortestAsignmentListIndex = 1
+		longestAsignmentListIndex = 0
+	}
+
+	for _, id := range twoElfsAssignments[shortestAsignmentListIndex] {
+		if Contains(id, twoElfsAssignments[longestAsignmentListIndex]) == true {
+			return true
+		}
+	}
+
+	return false
+}
+
 func main() {
 
 	fileName := os.Args[1]
