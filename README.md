@@ -4,6 +4,9 @@ In this read me I will keep a list of "Lessons learned" for each day of the even
 
 ## Lessons learned
 
+### Day 4
+Today was nothing new, just smooth sailing and no wrong awnsers when submitting :)
+
 ### Day 3
 
 Today was an interesting day. At first, my implementation got the wrong awnser. Even if my logic was sound and the example worked fine, I wasn't able to produce the right awnser. I resorted to writing tests, something that I found very easy to do in GO. This didn't find any problems. It was untill I explained my solution to a friend that I noticed that there was a mistake when splitting the rugsack content. 
