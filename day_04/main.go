@@ -52,7 +52,7 @@ func Contains(value int, arrayOfInts []int) bool {
 	return false
 }
 
-func DoesOneRangeFullyContainTheOther(twoElfsAssignments [2][]int) bool {
+func DoesOneRangePartiallyContainTheOther(twoElfsAssignments [2][]int) bool {
 
 	var shortestAsignmentListIndex int
 	var longestAsignmentListIndex int
@@ -65,12 +65,12 @@ func DoesOneRangeFullyContainTheOther(twoElfsAssignments [2][]int) bool {
 	}
 
 	for _, id := range twoElfsAssignments[shortestAsignmentListIndex] {
-		if Contains(id, twoElfsAssignments[longestAsignmentListIndex]) == false {
-			return false
+		if Contains(id, twoElfsAssignments[longestAsignmentListIndex]) == true {
+			return true
 		}
 	}
 
-	return true
+	return false
 }
 
 func main() {
@@ -96,7 +96,7 @@ func main() {
 
 		twoElfsAssignments := ExpandElfPair(fileScanner.Text())
 
-		if DoesOneRangeFullyContainTheOther(twoElfsAssignments) {
+		if DoesOneRangePartiallyContainTheOther(twoElfsAssignments) {
 			score++
 		}
 	}
