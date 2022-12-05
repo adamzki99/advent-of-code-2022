@@ -69,15 +69,21 @@ func ReOrderCrateStack(crateStack [][]string) [][]string {
 	return reOrderedCrateStacks
 }
 
-func PerformMove(move [3]int, crateStack *[][]string) {
+func CrateMover9001(move [3]int, crateStack *[][]string) {
 
 	homeStack := move[1] - 1
 	destinationStack := move[2] - 1
 
+	var tempStack []string
+
 	for i := 0; i < move[0]; i++ {
-		(*crateStack)[destinationStack] = append((*crateStack)[destinationStack], (*crateStack)[homeStack][len((*crateStack)[homeStack])-1])
+		tempStack = append(tempStack, (*crateStack)[homeStack][len((*crateStack)[homeStack])-1])
 
 		(*crateStack)[homeStack] = (*crateStack)[homeStack][:len((*crateStack)[homeStack])-1]
+	}
+
+	for i := 0; i < move[0]; i++ {
+		(*crateStack)[destinationStack] = append((*crateStack)[destinationStack], tempStack[len(tempStack)-1-i])
 	}
 }
 
@@ -118,16 +124,16 @@ func main() {
 	crateStacks = ReOrderCrateStack(crateStacks)
 
 	for _, move := range arrayOfMoves {
-		PerformMove(move, &crateStacks)
+		CrateMover9001(move, &crateStacks)
 	}
 
-	awnser := ""
+	answer := ""
 
 	for _, stack := range crateStacks {
 
-		awnser = awnser + stack[len(stack)-1]
+		answer = answer + stack[len(stack)-1]
 	}
 
-	fmt.Printf("Awnser %s", awnser)
+	fmt.Printf("Awnser: %s", answer)
 
 }
