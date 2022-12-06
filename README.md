@@ -4,6 +4,9 @@ In this read me I will keep a list of "Lessons learned" for each day of the even
 
 ## Lessons learned
 
+### Day 6
+Today was quite easy, so no new lessons learned :).
+
 ### Day 5
 
 Today I made use of pointer in GO, a concept I have used before in languages like C/C++. Always a little scary using pointers, but using them in GO seems easy and fun! Hopefully it is something that will be more useful in coming challenges.
