@@ -8,8 +8,8 @@ import (
 
 func PacketExaminations(subString string) bool {
 
-	for i := 0; i < 3; i++ {
-		for j := i + 1; j < 4; j++ {
+	for i := 0; i < len(subString)-1; i++ {
+		for j := i + 1; j < len(subString); j++ {
 			if subString[i] == subString[j] {
 				return false
 			}
@@ -19,12 +19,12 @@ func PacketExaminations(subString string) bool {
 	return true
 }
 
-func FindStartOfPacketMarker(line string) int {
+func FindStartOfPacketMarker(line string, stride int) int {
 
-	for i := 0; i < len(line)-4; i++ {
+	for i := 0; i < len(line)-stride; i++ {
 
-		if PacketExaminations(line[i:i+4]) == true {
-			return i
+		if PacketExaminations(line[i:i+stride]) == true {
+			return i + stride
 		}
 	}
 
@@ -44,7 +44,7 @@ func main() {
 	fileScanner.Split(bufio.ScanLines)
 
 	for fileScanner.Scan() {
-		fmt.Println("Answer:", FindStartOfPacketMarker(fileScanner.Text())+4)
+		fmt.Println("Answer:", FindStartOfPacketMarker(fileScanner.Text(), 14))
 	}
 
 }
