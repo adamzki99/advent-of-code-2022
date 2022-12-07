@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -15,15 +16,15 @@ type file struct {
 	parentFile     *file
 }
 
-func FindSumOfDirectoriesBelow100000(dir *file, result *int) {
+func FindSizesThatCanBeDeleted(dir *file, optionsForDeletion *[]int, sizeRequired int) {
 
-	if dir.size < 100000 {
-		*result = *result + dir.size
+	if dir.size > sizeRequired {
+		*optionsForDeletion = append(*optionsForDeletion, dir.size)
 	}
 
 	if dir.subDirectories != nil {
 		for _, directory := range dir.subDirectories {
-			FindSumOfDirectoriesBelow100000(directory, result)
+			FindSizesThatCanBeDeleted(directory, optionsForDeletion, sizeRequired)
 		}
 	}
 }
@@ -111,9 +112,19 @@ func main() {
 
 	UpdateDirectorySizes(&fileSystem)
 
-	result := 0
+	diskCapacity := 70000000
 
-	FindSumOfDirectoriesBelow100000(&fileSystem, &result)
+	spaceNeeded := 30000000
 
-	fmt.Println("Answer:", result)
+	sizeToBeRemoved := spaceNeeded - (diskCapacity - fileSystem.size)
+
+	fmt.Println("Space needed:", sizeToBeRemoved)
+
+	var optionsForDeletion []int
+
+	FindSizesThatCanBeDeleted(&fileSystem, &optionsForDeletion, sizeToBeRemoved)
+
+	sort.Ints(optionsForDeletion)
+
+	fmt.Println("Answer:", optionsForDeletion[0])
 }
