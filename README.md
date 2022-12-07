@@ -4,6 +4,12 @@ In this read me I will keep a list of "Lessons learned" for each day of the even
 
 ## Lessons learned
 
+### Day 7
+
+Today was more usage of pointers! And even a throwback to a computer science lab regarding filesystems.
+But today was nothing more that keeping everything in check when laying out the logic behind the program. My solution
+might not have ended up as the most efficient one, but it works and I have my stars ;-).
+
 ### Day 6
 Today was quite easy, so no new lessons learned :).
 
