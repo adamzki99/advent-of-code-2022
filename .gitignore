@@ -16,3 +16,6 @@
 
 # Visual Studio Code directories
 .vscode/
+
+# GoLand direcotries
+.idea/
