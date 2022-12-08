@@ -4,6 +4,14 @@ In this read me I will keep a list of "Lessons learned" for each day of the even
 
 ## Lessons learned
 
+### Day 8
+Nothing new today. I am starting to feel that the language, Go, is no longer an obstacle for me to complete the
+challenges. The syntax and functions that are commonly used is something that I can write without using Google, or
+something modern like ChatGPT ;-).
+
+I have switched to [GoLand](https://www.jetbrains.com/go/) as well. I feel like the experience writing Go in GoLand is
+much better compared to using VSCode.
+
 ### Day 7
 
 Today was more usage of pointers! And even a throwback to a computer science lab regarding filesystems.
@@ -11,14 +19,14 @@ But today was nothing more that keeping everything in check when laying out the 
 might not have ended up as the most efficient one, but it works and I have my stars ;-).
 
 ### Day 6
-Today was quite easy, so no new lessons learned :).
+Today was quite easy, so no new lessons learned :-).
 
 ### Day 5
 
 Today I made use of pointer in GO, a concept I have used before in languages like C/C++. Always a little scary using pointers, but using them in GO seems easy and fun! Hopefully it is something that will be more useful in coming challenges.
 
 ### Day 4
-Today was nothing new, just smooth sailing and no wrong answers when submitting :)
+Today was nothing new, just smooth sailing and no wrong answers when submitting :-)
 
 ### Day 3
 
