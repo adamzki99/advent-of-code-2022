@@ -4,53 +4,56 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 )
 
-func CheckVisibility(mapOfTrees [][]int, row int, column int, treeHeight int) bool {
+func GetScenicScore(mapOfTrees [][]int, row int, column int, treeHeight int) int {
 
-	leftSide := 0
-	rightSide := 0
+	// check left side
+	leftScenicScore := 0
+	for i := column - 1; i > -1; i-- {
 
-	treeTracker := &leftSide
+		leftScenicScore++
 
-	// check left and right
-	for i, tree := range mapOfTrees[row] {
-
-		if i == column {
-			treeTracker = &rightSide
-			continue
+		if mapOfTrees[row][i] >= treeHeight {
+			break
 		}
-
-		if tree >= treeHeight {
-			*treeTracker++
-		}
-
 	}
 
-	above := 0
-	below := 0
+	// check right side
+	rightScenicScore := 0
+	for i := column + 1; i < len(mapOfTrees[row]); i++ {
 
-	treeTracker = &above
-	// check top to bottom
-	for i, treeLine := range mapOfTrees {
+		rightScenicScore++
 
-		if i == row {
-			treeTracker = &below
-			continue
+		if mapOfTrees[row][i] >= treeHeight {
+			break
 		}
-
-		if treeLine[column] >= treeHeight {
-			*treeTracker++
-		}
-
 	}
 
-	if leftSide > 0 && rightSide > 0 && above > 0 && below > 0 {
-		return false
+	// check above
+	aboveScenicScore := 0
+	for i := row - 1; i > -1; i-- {
+		aboveScenicScore++
+
+		if mapOfTrees[i][column] >= treeHeight {
+			break
+		}
 	}
 
-	return true
+	// check below
+	belowScenicScore := 0
+	for i := row + 1; i < len(mapOfTrees); i++ {
+
+		belowScenicScore++
+
+		if mapOfTrees[i][column] >= treeHeight {
+			break
+		}
+	}
+
+	return leftScenicScore * rightScenicScore * aboveScenicScore * belowScenicScore
 
 }
 
@@ -89,9 +92,7 @@ func main() {
 
 	}
 
-	var visibleTrees []int
-
-	sumOfVisibleTrees := 0
+	var scenicScores []int
 
 	for i := 1; i < len(mapOfTrees)-1; i++ {
 
@@ -101,21 +102,13 @@ func main() {
 				continue
 			}
 
-			if CheckVisibility(mapOfTrees, i, i2, treeHeight) == true {
-				sumOfVisibleTrees++
-
-				visibleTrees = append(visibleTrees, i, i2)
-			}
+			scenicScores = append(scenicScores, GetScenicScore(mapOfTrees, i, i2, treeHeight))
 
 		}
 	}
 
-	// add top and bottom rows
-	sumOfVisibleTrees += 2 * len(mapOfTrees[0])
+	sort.Ints(scenicScores)
 
-	// add left and right side
-	sumOfVisibleTrees += 2 * (len(mapOfTrees) - 2)
-
-	fmt.Println("Answer:", sumOfVisibleTrees)
+	fmt.Println("Answer: ", scenicScores[len(scenicScores)-1])
 
 }
