@@ -47,17 +47,17 @@ func (m Monkey) PerformOperation(itemIndex int) {
 	if operationParts[4] == "*" {
 
 		m.items[itemIndex] = integers[0] * integers[1]
-		fmt.Printf("\t\tWorry level is multiplied by itself to %d.\n", m.items[itemIndex])
+		//fmt.Printf("\t\tWorry level is multiplied by itself to %d.\n", m.items[itemIndex])
 
 	} else if operationParts[4] == "+" {
 
 		m.items[itemIndex] = integers[0] + integers[1]
-		fmt.Printf("\t\tWorry level increases by %d to %d.\n", integers[1], m.items[itemIndex])
+		//fmt.Printf("\t\tWorry level increases by %d to %d.\n", integers[1], m.items[itemIndex])
 
 	} else {
 
 		m.items[itemIndex] = integers[0] - integers[1]
-		fmt.Printf("\t\tWorry level decreases by %d to %d.\n", integers[1], m.items[itemIndex])
+		//fmt.Printf("\t\tWorry level decreases by %d to %d.\n", integers[1], m.items[itemIndex])
 
 	}
 
@@ -90,6 +90,7 @@ func PerformThrow(dst *Monkey, item int) {
 
 func main() {
 
+	//read puzzle input
 	fileReader, err := os.Open("input.txt")
 
 	if err != nil {
@@ -187,38 +188,44 @@ func main() {
 
 	monkeyInspections := make([]int, len(monkeys))
 
-	// Perform 20 rounds
+	var commonDenominator int
+	commonDenominator = 1
 
-	for r := 0; r < 20; r++ {
+	for _, monkey := range monkeys {
+		commonDenominator *= monkey.test
+	}
+
+	//perform 10000 rounds
+
+	for r := 0; r < 10000; r++ {
 
 		for i, monkey := range monkeys {
 
-			fmt.Printf("Monkey %d:\n", i)
+			//fmt.Printf("Monkey %d:\n", i)
 
 			for itemIndex, _ := range monkey.items {
 				monkeyInspections[i]++
 
-				fmt.Printf("\tMonkey inspects an item with a worry level of %d.\n", monkey.items[itemIndex])
+				//fmt.Printf("\tMonkey inspects an item with a worry level of %d.\n", monkey.items[itemIndex])
 
 				monkey.PerformOperation(itemIndex)
 
-				monkey.items[itemIndex] = monkey.items[itemIndex] / 3
-				fmt.Printf("\t\tMonkey gets bored with item. Worry level is divided by 3 to %d.\n", monkey.items[itemIndex])
+				monkey.items[itemIndex] = monkey.items[itemIndex] % commonDenominator
+				//fmt.Printf("\t\tMonkey gets bored with item. Worry level is divided by 3 to %d.\n", monkey.items[itemIndex])
 
 				if monkey.PerformTest(itemIndex) == true {
-					fmt.Printf("\t\tCurrent worry level is divisible by %d.\n", monkey.test)
+					//fmt.Printf("\t\tCurrent worry level is divisible by %d.\n", monkey.test)
 					PerformThrow(&monkeys[monkey.ifTrue], monkey.items[itemIndex])
-					fmt.Printf("\t\tItem with worry level %d is thrown to monkey %d.\n", monkey.items[itemIndex], monkey.ifTrue)
+					//fmt.Printf("\t\tItem with worry level %d is thrown to monkey %d.\n", monkey.items[itemIndex], monkey.ifTrue)
 				} else {
-					fmt.Printf("\t\tCurrent worry level is not divisible by %d.\n", monkey.test)
+					//fmt.Printf("\t\tCurrent worry level is not divisible by %d.\n", monkey.test)
 					PerformThrow(&monkeys[monkey.ifFalse], monkey.items[itemIndex])
-					fmt.Printf("\t\tItem with worry level %d is thrown to monkey %d.\n", monkey.items[itemIndex], monkey.ifFalse)
+					//fmt.Printf("\t\tItem with worry level %d is thrown to monkey %d.\n", monkey.items[itemIndex], monkey.ifFalse)
 
 				}
 
 			}
 			monkeys[i].items = nil
-
 		}
 
 	}
