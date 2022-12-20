@@ -6,7 +6,7 @@ In this read me I will keep a list of "Lessons learned" for each day of the even
 
 ### Day 11
 Today was the first time using OOP in GO! It was done with a quick and dirty implementation of having everything in the
-same file. It felt easy and intuitive to use, and might become useful in upcoming challanges.
+same file. It felt easy and intuitive to use, and might become useful in upcoming challenges.
 
 ### Day 8
 Nothing new today. I am starting to feel that the language, Go, is no longer an obstacle for me to complete the
